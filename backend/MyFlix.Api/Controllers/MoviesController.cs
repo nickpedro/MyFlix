@@ -5,6 +5,7 @@ using MyFlix.Api.Services;
 
 namespace MyFlix.Api.Controllers
 {
+    // Controlador de filmes para gerenciar as operações relacionadas aos filmes
 
     [ApiController]
     [Route("api/[controller]")]
