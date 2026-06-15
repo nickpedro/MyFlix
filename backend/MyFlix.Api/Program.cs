@@ -7,6 +7,18 @@ using MyFlix.Api.Validators;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure CORS FrontEnd
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
 // Add services
 builder.Services.AddControllers();
 
@@ -35,6 +47,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowFrontend");
 app.MapControllers();
 
 app.Run();
