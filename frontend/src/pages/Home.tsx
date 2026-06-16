@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../services/movieService";
 import type { Movie } from "../types/Movie";
+import MovieForm from "../components/MovieForm";
 
 export default function Home() {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -21,6 +22,10 @@ export default function Home() {
   return (
     <div style={{ padding: "20px" }}>
       <h1>🎬 MyFlix</h1>
+
+      <MovieForm onMovieCreated={loadMovies} />
+      
+      <hr />
 
       <h2>Lista de Filmes</h2>
 
