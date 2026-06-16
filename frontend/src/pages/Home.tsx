@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import api from "../services/movieService";
 import type { Movie } from "../types/Movie";
+
 import MovieForm from "../components/MovieForm";
+import MovieList from "../components/MovieList";
 
 export default function Home() {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [movieToEdit, setMovieToEdit] = useState<Movie | null>(null);
 
   useEffect(() => {
     loadMovies();
@@ -23,8 +26,12 @@ export default function Home() {
     <div style={{ padding: "20px" }}>
       <h1>🎬 MyFlix</h1>
 
-      <MovieForm onMovieCreated={loadMovies} />
-      
+      <MovieForm
+        onMovieSaved={loadMovies}
+        movieToEdit={movieToEdit}
+        clearEditing={() => setMovieToEdit(null)}
+      />
+
       <hr />
 
       <h2>Lista de Filmes</h2>
@@ -32,17 +39,11 @@ export default function Home() {
       {movies.length === 0 ? (
         <p>Nenhum filme encontrado.</p>
       ) : (
-        <ul>
-          {movies.map((movie) => (
-            <li key={movie.id}>
-              <strong>{movie.title}</strong>
-              {" - "}
-              {movie.releaseYear}
-              {" - "}
-              {movie.genre}
-            </li>
-          ))}
-        </ul>
+        <MovieList
+          movies={movies}
+          onMovieDeleted={loadMovies}
+          onMovieEdit={setMovieToEdit}
+        />
       )}
     </div>
   );

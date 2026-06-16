@@ -56,6 +56,7 @@ namespace MyFlix.Api.Services
                 ReleaseYear = dto.ReleaseYear,
                 Genre = dto.Genre,
                 Status = MovieStatus.ToWatch,
+                Rating = dto.Rating
             };
             _context.Movies.Add(movie);
 

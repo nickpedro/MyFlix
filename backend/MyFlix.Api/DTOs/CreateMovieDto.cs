@@ -1,9 +1,15 @@
-﻿namespace MyFlix.Api.DTOs
+﻿using MyFlix.Api.Models;
+
+namespace MyFlix.Api.DTOs
 {
     public class CreateMovieDto
     {
         public string Title { get; set; } = string.Empty;
         public int ReleaseYear { get; set; }
         public string Genre { get; set; } = string.Empty;
+
+        public MovieStatus Status { get; set; }
+
+        public int? Rating { get; set; }
     }
 }
